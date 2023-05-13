@@ -1,0 +1,260 @@
+/*
+ * Author: Gabriel dos Reis
+ * Date: 5/9/2023
+ * Purpose: Create an application that calculates the registration fee for a conference. The general conference
+ * fee is $895 per person, and student registration is $495 per person. Optional opening night with a keynote speech
+ * for $30 per person. Plus the workshops
+ * Workshops:
+ * 		Intro to E-commence -> $295
+ * 		Future of the Web -> $295
+ * 		Adv Java Programming -> $395
+ * 		Network Security -> $395
+ * User should select the registration type, the optional opening night dinner, and keynote speech, and as many
+ * pre conference workshops as desired. The total cost should be displayed.
+ * 
+ */
+package application;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.PrintWriter;
+
+import application.RegistrationFee.ResetButtonHandler;
+//Foundation for all GUI application
+import javafx.application.Application;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
+import javafx.stage.Stage;
+import javafx.scene.Scene;
+//Label import
+import javafx.scene.control.Label;
+// Button import
+import javafx.scene.control.Button;
+// HBox import
+import javafx.scene.layout.HBox;
+// VBox Import
+import javafx.scene.layout.VBox;
+// Grid import
+import javafx.scene.layout.GridPane;
+// Images import
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+//Radio Button
+import javafx.scene.control.RadioButton;
+import javafx.scene.control.ToggleGroup;
+//List
+import javafx.scene.control.ListView;
+import javafx.scene.control.SelectionMode;
+import javafx.scene.control.TextField;
+import javafx.collections.ObservableList;
+//Check boxes
+import javafx.scene.control.CheckBox;
+// Event Handler
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
+
+// I WANT TO ADD FILE I/O
+
+public class Menu extends Application {
+	// Fields 
+	private Button turtleButton;
+	private Button amphButton;
+	private Button snakeButton;
+	private Button JuniorBttn;
+	private Button PeterBttn;
+	private Button IgorBttn;
+	private Button TeddyBttn;
+	private Button FlowerBttn;
+	private Button PrincessBttn;
+	private Button backButton;
+	private Button closeButton;
+
+	   
+	public static void main(String[] args) {
+	      // Launch the application.
+	      launch(args);
+	}
+	  @Override
+	   public void start(Stage primaryStage) throws IOException
+	   {
+		  // Create the button to navigate through the menu
+		  turtleButton = new Button("Turtles");
+		  amphButton = new Button("Amphibians");
+		  snakeButton = new Button ("Snakes");
+		  
+//Open new windows where user can select the turtle
+		  turtleButton.setOnAction(new EventHandler<ActionEvent>() {
+			    @Override 
+			    public void handle(ActionEvent e) {
+			        
+			    	// Create the Button that refers to each animal
+		    		JuniorBttn = new Button("Junior");
+		    		PeterBttn = new Button("Peter");
+		    		IgorBttn = new Button ("Igor");
+		    		TeddyBttn = new Button("Teddy");
+			        
+			              
+			        // Put each button inside a VBox
+			        VBox turtleVBox = new VBox(10, JuniorBttn,PeterBttn, IgorBttn, TeddyBttn);
+			        
+			        // Back button to return to the previous screen and close button to close application
+			        backButton = new Button("Back");
+			        backButton.setOnAction(new EventHandler<ActionEvent>() {
+
+			            @Override
+			            public void handle(ActionEvent arg0) {
+			                backButton.getScene().setRoot(loadScreenOne());             
+			            }
+			        });
+				    closeButton = new Button("Close");
+				    closeButton.setOnAction(new CloseButtonHandler());
+			        
+				    // Put the close and back button inside a HBox
+			        HBox buttonHBox = new HBox(20, backButton, closeButton );
+			        
+			        // mainVBox that holds all the buttons
+			        VBox mainVBox = new VBox(20, turtleVBox, buttonHBox);
+		        
+			        // Set the alignment to center.
+			        turtleVBox.setAlignment(Pos.CENTER);
+			        buttonHBox.setAlignment(Pos.CENTER);
+			        
+			        // Set the main VBox's padding to 10 pixels.
+			        turtleVBox.setPadding(new Insets(10));
+			        mainVBox.setPadding(new Insets(15));
+			        
+			        // Set a scene 200x300 pixels
+			        Scene scene = new Scene(mainVBox, 200, 300);
+			        
+			        // Add the Scene to the Stage.
+			        primaryStage.setScene(scene);
+			        
+			        // Show the window.
+			        primaryStage.show(); 
+			    }
+			}
+			);
+	      
+//Open new window for the amphibians animals  
+	      amphButton.setOnAction(new EventHandler<ActionEvent>() {
+			    @Override 
+			    public void handle(ActionEvent e) {
+			        
+			    	// Create the Button to hold animals
+		    		JuniorBttn = new Button("Junior");
+		    		PeterBttn = new Button("Peter");
+		    		IgorBttn = new Button ("Igor");
+		    		TeddyBttn = new Button("Teddy");
+			        
+			              
+			        // Put the button in a VBox.
+			        VBox amphVBox = new VBox(10, JuniorBttn,PeterBttn, IgorBttn, TeddyBttn);
+			        
+			        backButton = new Button("Back");
+				    backButton.setOnAction(new BackButtonHandler());
+				    closeButton = new Button("Close");
+				    closeButton.setOnAction(new CloseButtonHandler());
+			        
+			        HBox buttonHBox = new HBox(20, backButton, closeButton );
+			        
+			        VBox mainVBox = new VBox(20, amphVBox, buttonHBox);
+		        
+			        // Set the main VBox's alignment to center.
+			        amphVBox.setAlignment(Pos.CENTER);
+			        buttonHBox.setAlignment(Pos.CENTER);
+			        
+			        // Set the main VBox's padding to 10 pixels.
+			        amphVBox.setPadding(new Insets(10));
+			        mainVBox.setPadding(new Insets(15));
+			        
+			        Scene scene = new Scene(mainVBox, 200, 300);
+			        
+			        // Add the Scene to the Stage.
+			        primaryStage.setScene(scene);
+			        
+			        // Show the window.
+			        primaryStage.show(); 
+			    }
+			}
+			);
+	      
+// Open new window to open snake animals
+	      snakeButton.setOnAction(new EventHandler<ActionEvent>() {
+			    @Override 
+			    public void handle(ActionEvent e) {
+			        // Create the Button.
+		    		FlowerBttn = new Button("Flower");
+		    		PrincessBttn = new Button("Princess");
+			        
+			              
+			        // Put the CheckBoxes in a VBox.
+			        VBox snakeVBox = new VBox(10, FlowerBttn, PrincessBttn);
+			        
+			        backButton = new Button("Back");
+				    backButton.setOnAction(new BackButtonHandler());
+				    closeButton = new Button("Close");
+				    closeButton.setOnAction(new CloseButtonHandler());
+			        
+			        HBox buttonHBox = new HBox(20, backButton, closeButton );
+			        
+			        VBox mainVBox = new VBox(20, snakeVBox, buttonHBox);
+		        
+			        // Set the main VBox's alignment to center.
+			        snakeVBox.setAlignment(Pos.CENTER);
+			        buttonHBox.setAlignment(Pos.CENTER);
+			        
+			        // Set the main VBox's padding to 10 pixels.
+			        snakeVBox.setPadding(new Insets(10));
+			        mainVBox.setPadding(new Insets(15));
+
+			        
+			        Scene scene = new Scene(mainVBox, 200, 300);
+			        
+			        // Add the Scene to the Stage.
+			        primaryStage.setScene(scene);
+			        
+			        // Show the window.
+			        primaryStage.show(); 
+			    }
+			}
+			);
+	      
+		  VBox animalVBox = new VBox(40, turtleButton, amphButton, snakeButton);
+	      
+	      animalVBox.setAlignment(Pos.CENTER);
+	      // Set the mainVBox's padding to 10 pixels.
+	      animalVBox.setPadding(new Insets(10));
+	      
+	      // Create a Scene.
+	      Scene scene = new Scene(animalVBox, 200, 300);
+	      
+	      // Add the Scene to the Stage.
+	      primaryStage.setScene(scene);
+	      
+	      // Set the stage title.
+	      primaryStage.setTitle("Willowbrook Animals");
+	      
+	      // Show the window.
+	      primaryStage.show();   
+	      
+	   }
+	   
+	   class BackButtonHandler implements EventHandler<ActionEvent>
+	   {
+	      @Override
+	      public void handle(ActionEvent event)
+	      {
+	         	         
+	      }
+	   }
+	   
+	   class CloseButtonHandler implements EventHandler<ActionEvent>
+	   {
+	      @Override
+	      public void handle(ActionEvent event)
+	      {
+	          System.exit(0);
+        
+	      }
+	   }
+	      
+	   }
