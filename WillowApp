@@ -1,18 +1,3 @@
-/*
- * Author: Gabriel dos Reis
- * Date: 5/9/2023
- * Purpose: Create an application that calculates the registration fee for a conference. The general conference
- * fee is $895 per person, and student registration is $495 per person. Optional opening night with a keynote speech
- * for $30 per person. Plus the workshops
- * Workshops:
- * 		Intro to E-commence -> $295
- * 		Future of the Web -> $295
- * 		Adv Java Programming -> $395
- * 		Network Security -> $395
- * User should select the registration type, the optional opening night dinner, and keynote speech, and as many
- * pre conference workshops as desired. The total cost should be displayed.
- * 
- */
 package application;
 import java.io.FileNotFoundException;
 import java.io.IOException;
